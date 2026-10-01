@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Flex X Gaming - Play free mind, IQ, memory, reaction and puzzle games online.">
+<meta name="keywords" content="free online games, IQ test, mind games, memory games, puzzle games, Flex X Gaming">
+<meta name="theme-color" content="#090d1c">
+
+<title>Flex X Gaming - Free Mind & IQ Games</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+font-family:Arial,sans-serif;
+background:#070a14;
+color:#fff;
+min-height:100vh
+}
+header{
+position:sticky;top:0;z-index:20;
+background:rgba(7,10,20,.96);
+border-bottom:1px solid #242a42;
+padding:13px 5%;
+display:flex;align-items:center;gap:15px;
+justify-content:space-between
+}
+.logo{font-size:24px;font-weight:900}
+.logo span{color:#8b5cf6}
+.balance{
+background:#151b31;border:1px solid #6845c7;
+padding:9px 13px;border-radius:10px;font-weight:bold
+}
+main{width:92%;max-width:1200px;margin:auto}
+.hero{
+margin:22px 0;padding:32px 25px;border-radius:20px;
+background:radial-gradient(circle at 85% 20%,#633bd2,transparent 35%),
+linear-gradient(135deg,#12182d,#0b0f1c);
+border:1px solid #2d3553
+}
+.hero h1{font-size:clamp(32px,7vw,60px)}
+.hero h1 span{color:#a477ff}
+.hero p{margin-top:10px;color:#aeb6d0;line-height:1.6}
+.search{
+margin-top:20px;width:100%;max-width:550px;
+padding:14px;border-radius:11px;border:1px solid #343b58;
+background:#0c1020;color:#fff;outline:none
+}
+.ad{
+height:80px;border:1px dashed #343b58;border-radius:14px;
+display:flex;align-items:center;justify-content:center;
+color:#727a94;margin:20px 0
+}
+h2{margin:24px 0 14px}
+.categories{display:flex;gap:8px;overflow:auto;padding-bottom:8px}
+.cat{
+white-space:nowrap;background:#12182b;color:#cbd1e4;
+border:1px solid #303751;padding:9px 14px;border-radius:20px
+}
+.cat.active{background:#7650dc;color:#fff}
+.games{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+gap:15px
+}
+.game{
+background:#111629;border:1px solid #272e49;
+border-radius:16px;overflow:hidden;
+transition:.2s
+}
+.game:hover{transform:translateY(-4px);border-color:#7954df}
+.icon{
+height:125px;display:flex;align-items:center;justify-content:center;
+font-size:55px;background:linear-gradient(135deg,#252d4b,#151a30)
+}
+.info{padding:14px}
+.info h3{margin-bottom:6px}
+.info p{font-size:13px;color:#8992ae;margin-bottom:13px}
+.play,.action{
+border:0;border-radius:9px;background:#7650dc;
+color:white;font-weight:bold;padding:11px 15px;cursor:pointer
+}
+.play{width:100%}
+.play:hover,.action:hover{background:#8d67ee}
+.panel{
+display:none;margin:25px 0;padding:22px;
+background:#111629;border:1px solid #303751;border-radius:17px
+}
+.panel.active{display:block}
+.close{
+float:right;background:#252b40;color:#fff;border:0;
+padding:7px 11px;border-radius:8px;cursor:pointer
+}
+.screen{clear:both;padding-top:20px;text-align:center}
+.big{font-size:48px;font-weight:900;color:#a477ff;margin:20px}
+.msg{color:#aeb6cf;min-height:25px;margin:12px}
+.options{
+display:grid;grid-template-columns:repeat(2,minmax(120px,1fr));
+gap:10px;max-width:500px;margin:18px auto
+}
+.option{
+padding:13px;background:#1a2035;color:#fff;
+border:1px solid #38405d;border-radius:10px;cursor:pointer
+}
+.option:hover{background:#2a3150}
+.memory{
+display:grid;grid-template-columns:repeat(4,70px);
+gap:9px;justify-content:center;margin:20px auto
+}
+.card{
+width:70px;height:70px;border:0;border-radius:10px;
+background:#252d49;color:#fff;font-size:30px;cursor:pointer
+}
+.seq{
+font-size:34px;letter-spacing:10px;margin:25px
+}
+.colorBox{
+width:180px;height:180px;border-radius:20px;margin:20px auto;
+cursor:pointer
+}
+.reaction{
+padding:50px 20px;border-radius:15px;background:#252d49;
+cursor:pointer;max-width:500px;margin:20px auto
+}
+footer{
+margin-top:40px;padding:30px 5%;text-align:center;
+border-top:1px solid #242a42;color:#68718d
+}
+.small{font-size:12px;color:#6f7892;margin-top:8px}
+@media(max-width:600px){
+header{flex-wrap:wrap}
+.logo{font-size:21px}
+.balance{font-size:12px}
+.games{grid-template-columns:repeat(2,1fr)}
+.icon{height:105px;font-size:43px}
+.info{padding:11px}
+.info h3{font-size:16px}
+.memory{grid-template-columns:repeat(4,62px)}
+.card{width:62px;height:62px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">FLEX <span>X</span> GAMING</div>
+<div class="balance">Demo XP: <span id="xp">0</span></div>
+</header>
+
+<main>
+
+<section class="hero">
+<h1>FLEX <span>X</span> GAMING</h1>
+<p>
+Play free IQ, brain, memory, reaction and puzzle games.
+Challenge yourself and improve your score.
+</p>
+<input id="search" class="search"
+placeholder="🔎 Search games..."
+oninput="searchGames()">
+</section>
+
+<div class="ad">ADVERTISEMENT SPACE</div>
+
+<h2>🎮 Game Categories</h2>
+
+<div class="categories">
+<button class="cat active" onclick="filterGames('all',this)">All</button>
+<button class="cat" onclick="filterGames('mind',this)">🧠 Mind</button>
+<button class="cat" onclick="filterGames('memory',this)">🔮 Memory</button>
+<button class="cat" onclick="filterGames('reaction',this)">⚡ Reaction</button>
+<button class="cat" onclick="filterGames('puzzle',this)">🧩 Puzzle</button>
+</div>
+
+<h2>🔥 12 Games</h2>
+
+<section class="games" id="games">
+
+<div class="game" data-cat="mind" data-name="iq test">
+<div class="icon">🧠</div><div class="info">
+<h3>IQ Test</h3><p>Test your logical thinking.</p>
+<button class="play" onclick="openGame('iq')">PLAY</button>
+</div></div>
+
+<div class="game" data-cat="memory" data-name="memory match">
+<div class="icon">🔮</div><div class="info">
+<h3>Memory Match</h3><p>Find all matching pairs.</p>
+<button class="play" onclick="openGame('memory')">PLAY</button>
+</div></div>
+
+<div class="game" data-cat="reaction" data-name="reaction test">
+<div class="icon">⚡</div><div class="info">
+<h3>Reaction Test</h3><p>How fast are you?</p>
+<button class="play" onclick="openGame('reaction')">PLAY</button>
+</div></div>
+
+<div class="game" data-cat="mind" data-name="math master">
+<div class="icon">➗</div><div class="info">
+<h3>Math Master</h3><p>Solve calculations quickly.</p>
+<button class="play" onclick="openGame('math')">PLAY</button>
+</div></div>
+
+<div class="game" data-cat="puzzle" data-name="number sequence">
+<div class="icon">🔢</div><div class="info">
+<h3>Number Sequence</h3><p>Find the missing number.</p>
+<button class="play" onclick="openGame('sequence')">PLAY</button>
+</div></div>
+
+<div class="game" data-cat="puzzle" data-name="odd one out">
+<div class="icon">👀</div><div class="info">
+<h3>Odd One Out</h3><p>Spot the different symbol.</p>
+<button class="play" onclick="openGame('odd')">PLAY</button>
+</div></div>
+
+<div class="game" data-cat="reaction" data-name="tap challenge">
+<div class="icon">👆</div><div class="info">
+<h3>Tap Challenge</h3><p>Tap as fast as possible.</p>
+<button class="play" onclick="openGame('tap')">PLAY</button>
+</div></div>
+
+<div class="game" data-cat="memory" data-name="simon memory">
+<div class="icon">🎨</div><div class="info">
+<h3>Simon Memory</h3><p>Remember the sequence.</p>
+<button class="play" onclick="openGame('simon')">PLAY</button>
+</div></div>
+
+<div class="game" data-cat="puzzle" data-name="word scramble">
+<div class="icon">🔤</div><div class="info">
+<h3>Word Scramble</h3><p>Unscramble the word.</p>
+<button class="play" onclick="openGame('word')">PLAY</button>
+</div></div>
+
+<div class="game" data-cat="puzzle" data-name="tic tac toe">
+<div class="icon">⭕</div><div class="info">
+<h3>Tic Tac Toe</h3><p>Play against the computer.</p>
+<button class="play" onclick="openGame('ttt')">PLAY</button>
+</div></div>
+
+<div class="game" data-cat="mind" data-name="quick quiz">
+<div class="icon">❓</div><div class="info">
+<h3>Quick Quiz</h3><p>Answer general questions.</p>
+<button class="play" onclick="openGame('quiz')">PLAY</button>
+</div></div>
+
+<div class="game" data-cat="reaction" data-name="color test">
+<div class="icon">🌈</div><div class="info">
+<h3>Color Test</h3><p>Choose the correct color.</p>
+<button class="play" onclick="openGame('color')">PLAY</button>
+</div></div>
+
+</section>
+
+<section class="panel" id="panel">
+<button class="close" onclick="closeGame()">CLOSE</button>
+<div class="screen" id="screen"></div>
+  </section>

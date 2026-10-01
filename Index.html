@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flex X Gaming</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+  background:#080b16;
+  color:#fff;
+  min-height:100vh;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(8,11,22,.95);
+  border-bottom:1px solid #242942;
+  padding:14px 5%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.logo span{
+  color:#8b5cf6;
+}
+
+nav{
+  display:flex;
+  gap:8px;
+}
+
+nav button{
+  background:#151a2d;
+  color:#fff;
+  border:1px solid #292f49;
+  padding:9px 14px;
+  border-radius:9px;
+  cursor:pointer;
+}
+
+nav button:hover{
+  background:#252c49;
+}
+
+.balance{
+  background:linear-gradient(135deg,#171d35,#21183d);
+  border:1px solid #6941c6;
+  padding:10px 14px;
+  border-radius:12px;
+  font-weight:bold;
+}
+
+main{
+  width:90%;
+  max-width:1200px;
+  margin:auto;
+}
+
+.hero{
+  margin-top:25px;
+  padding:35px;
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 80% 20%,#6937d8,transparent 35%),
+    linear-gradient(135deg,#12172a,#0b0e1b);
+  border:1px solid #2c3352;
+}
+
+.hero h1{
+  font-size:clamp(32px,6vw,60px);
+  margin-bottom:10px;
+}
+
+.hero h1 span{
+  color:#9b6cff;
+}
+
+.hero p{
+  color:#aeb5ce;
+  max-width:600px;
+  line-height:1.6;
+}
+
+.search{
+  margin-top:22px;
+  width:100%;
+  max-width:500px;
+  padding:14px 18px;
+  border-radius:12px;
+  border:1px solid #303751;
+  background:#0d1120;
+  color:#fff;
+  outline:none;
+}
+
+.ad{
+  margin:22px 0;
+  min-height:80px;
+  border:1px dashed #3b425e;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#737b98;
+}
+
+.section-title{
+  margin:28px 0 15px;
+  font-size:24px;
+}
+
+.categories{
+  display:flex;
+  gap:9px;
+  overflow-x:auto;
+  padding-bottom:8px;
+}
+
+.cat{
+  white-space:nowrap;
+  border:1px solid #303751;
+  background:#111629;
+  color:#cbd1e5;
+  padding:9px 15px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+.cat.active,
+.cat:hover{
+  background:#7145d9;
+  border-color:#8d66ed;
+  color:#fff;
+}
+
+.games{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+}
+
+.game{
+  background:#111629;
+  border:1px solid #272e49;
+  border-radius:17px;
+  overflow:hidden;
+  transition:.2s;
+}
+
+.game:hover{
+  transform:translateY(-4px);
+  border-color:#7650d9;
+}
+
+.game-img{
+  height:135px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:55px;
+  background:linear-gradient(135deg,#242b49,#151a30);
+}
+
+.game-body{
+  padding:15px;
+}
+
+.game-body h3{
+  margin-bottom:6px;
+}
+
+.game-body p{
+  color:#8e96b1;
+  font-size:13px;
+  margin-bottom:14px;
+}
+
+.play{
+  width:100%;
+  padding:11px;
+  border:0;
+  border-radius:9px;
+  background:#7650dc;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.play:hover{
+  background:#8b63ee;
+}
+
+.panel{
+  display:none;
+  margin:25px 0;
+  background:#111629;
+  border:1px solid #303751;
+  border-radius:18px;
+  padding:22px;
+}
+
+.panel.active{
+  display:block;
+}
+
+.close{
+  float:right;
+  background:#242a40;
+  color:#fff;
+  border:0;
+  padding:7px 12px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.game-screen{
+  clear:both;
+  padding-top:20px;
+  text-align:center;
+}
+
+.big-number{
+  font-size:45px;
+  font-weight:bold;
+  margin:20px;
+  color:#a477ff;
+}
+
+.action{
+  border:0;
+  border-radius:10px;
+  padding:13px 20px;
+  background:#7650dc;
+  color:#fff;
+  cursor:pointer;
+  font-weight:bold;
+  margin:5px;
+}
+
+.action.red{
+  background:#a83d5c;
+}
+
+.message{
+  margin:15px;
+  color:#b9c0d8;
+  min-height:24px;
+}
+
+footer{
+  margin-top:40px;
+  padding:30px 5%;
+  text-align:center;
+  color:#69718c;
+  border-top:1px solid #242942;
+}
+
+.notice{
+  font-size:12px;
+  color:#747c96;
+  margin-top:10px;
+}
+
+@media(max-width:650px){
+  header{
+    flex-wrap:wrap;
+  }
+
+  nav{
+    order:3;
+    width:100%;
+    overflow-x:auto;
+  }
+
+  .hero{
+    padding:25px 20px;
+  }
+
+  .balance{
+    font-size:13px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">FLEX <span>X</span> GAMING</div>
+
+  <nav>
+    <button onclick="scrollToGames()">Games</button>
+    <button onclick="showLeaderboard()">Leaderboard</button>
+    <button onclick="resetDemo()">Reset</button>
+  </nav>
+
+  <div class="balance">
+    Demo Balance: <span id="balance">₹5,00,000</span>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <h1>PLAY <span>FLEX X</span></h1>
+  <p>
+    Play free browser games, collect scores and compete on the demo leaderboard.
+  </p>
+
+  <input
+    class="search"
+    id="search"
+    type="text"
+    placeholder="Search games..."
+    oninput="searchGames()"
+  >
+</section>
+
+<div class="ad">
+  Advertisement Space
+</div>
+
+<h2 class="section-title">Categories</h2>
+
+<div class="categories">
+  <button class="cat active" onclick="filterGames('all',this)">All</button>
+  <button class="cat" onclick="filterGames('arcade',this)">Arcade</button>
+  <button class="cat" onclick="filterGames('memory',this)">Memory</button>
+  <button class="cat" onclick="filterGames('strategy',this)">Strategy</button>
+</div>
+
+<h2 class="section-title" id="gamesTitle">Popular Games</h2>
+
+<section class="games" id="games">
+
+  <div class="game" data-category="arcade" data-name="tap challenge">
+    <div class="game-img">⚡</div>
+    <div class="game-body">
+      <h3>Tap Challenge</h3>
+      <p>Tap as fast as you can.</p>
+      <button class="play" onclick="openGame('tap')">PLAY NOW</button>
+    </div>
+  </div>
+
+  <div class="game" data-category="memory" data-name="memory match">
+    <div class="game-img">🧠</div>
+    <div class="game-body">
+      <h3>Memory Match</h3>
+      <p>Find matching symbols.</p>
+      <button class="play" onclick="openGame('memory')">PLAY NOW</button>
+    </div>
+  </div>
+
+  <div class="game" data-category="strategy" data-name="tic tac toe">
+    <div class="game-img">⭕</div>
+    <div class="game-body">
+      <h3>Tic Tac Toe</h3>
+      <p>Beat the computer.</p>
+      <button class="play" onclick="openGame('ttt')">PLAY NOW</button>
+    </div>
+  </div>
+
+</section>
+
+<section class="panel" id="gamePanel">
+
+  <button class="close" onclick="closeGame()">Close</button>
+
+  <div class="game-screen" id="gameScreen"></div>
+
+</section>
+
+<section class="panel" id="leaderboard">
+
+  <button class="close" onclick="closeLeaderboard()">Close</button>
+
+  <div style="clear:both;padding-top:20px">
+
+    <h2>🏆 Demo Leaderboard</h2>
+
+    <br>
+
+    <p>🥇 Flex Player — 98,500 XP</p>
+    <br>
+    <p>🥈 Shadow Gamer — 82,300 XP</p>
+    <br>
+    <p>🥉 X Warrior — 74,900 XP</p>
+    <br>
+    <p>🎮 You — <span id="yourScore">0</span> XP</p>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  <b>FLEX X GAMING</b>
+  <div class="notice">
+    Demo game only. Balance shown on this website has no real monetary value,
+    cannot be deposited, withdrawn, transferred or exchanged for cash.
+  </div>
+</footer>
+
+<script>
+
+let balance = Number(localStorage.getItem("flexBalance"));
+
+if(!balance){
+  balance = 500000;
+  localStorage.setItem("flexBalance",balance);
+}
+
+let score = Number(localStorage.getItem("flexScore")) || 0;
+
+function money(n){
+  return "₹" + n.toLocaleString("en-IN");
+}
+
+function updateBalance(){
+  document.getElementById("balance").textContent = money(balance);
+  localStorage.setItem("flexBalance",balance);
+}
+
+function addScore(n){
+  score += n;
+  localStorage.setItem("flexScore",score);
+  document.getElementById("yourScore").textContent = score;
+}
+
+function scrollToGames(){
+  document.getElementById("gamesTitle").scrollIntoView({
+    behavior:"smooth"
+  });
+}
+
+function openGame(type){
+
+  const panel = document.getElementById("gamePanel");
+  const screen = document.getElementById("gameScreen");
+
+  panel.classList.add("active");
+  panel.scrollIntoView({behavior:"smooth"});
+
+  if(type==="tap"){
+    tapGame();
+  }
+
+  if(type==="memory"){
+    memoryGame();
+  }
+
+  if(type==="ttt"){
+    tttGame();
+  }
+}
+
+function closeGame(){
+  document.getElementById("gamePanel").classList.remove("active");
+}
+
+function tapGame(){
+
+  let taps = 0;
+  let time = 10;
+  let running = false;
+  let timer;
+
+  document.getElementById("gameScreen").innerHTML = `
+
+    <h2>⚡ Tap Challenge</h2>
+
+    <p class="message">
+      You have 10 seconds. Tap as many times as possible.
+    </p>
+
+    <div class="big-number" id="tapCount">0</div>
+
+    <p>Time: <span id="tapTime">10</span>s</p>
+
+    <br>
+
+    <button class="action" id="tapButton">
+      START
+    </button>
+
+  `;
+
+  const button = document.getElementById("tapButton");
+
+  button.onclick = function(){
+
+    if(!running){
+
+      running = true;
+      taps = 0;
+      time = 10;
+
+      button.textContent = "TAP!";
+
+      timer = setInterval(()=>{
+
+        time--;
+
+        document.getElementById("tapTime").textContent = time;
+
+        if(time<=0){
+
+          clearInterval(timer);
+          running = false;
+
+          button.textContent = "START";
+
+          const reward = taps * 100;
+
+          balance += reward;
+
+          addScore(taps * 10);
+          updateBalance();
+
+          document.getElementById("gameScreen").insertAdjacentHTML(
+            "beforeend",
+            `<div class="message">
+              Finished! ${taps} taps — +${money(reward)} demo balance.
+            </div>`
+          );
+        }
+
+      },1000);
+
+    }else{
+
+      taps++;
+
+      document.getElementById("tapCount").textContent = taps;
+
+    }
+
+  };
+
+}
+
+function memoryGame(){
+
+  const symbols = ["🍎","🍎","🚀","🚀","⭐","⭐","🔥","🔥"];
+
+  symbols.sort(()=>Math.random()-0.5);
+
+  let first = null;
+  let lock = false;
+  let matched = 0;
+
+  document.getElementById("gameScreen").innerHTML = `
+
+    <h2>🧠 Memory Match</h2>
+
+    <p class="message">Match all pairs.</p>
+
+    <div id="memoryBoard"
+      style="
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      max-width:420px;
+      margin:20px auto;
+      ">
+    </div>
+
+  `;
+
+  const board = document.getElementById("memoryBoard");
+
+  symbols.forEach((symbol,index)=>{
+
+    const card = document.createElement("button");
+
+    card.textContent = "?";
+
+    card.style.cssText = `
+      height:70px;
+      font-size:30px;
+      border:1px solid #3a4260;
+      border-radius:10px;
+      background:#1a2035;
+      color:white;
+      cursor:pointer;
+    `;
+
+    card.onclick = function(){
+
+      if(lock || card.dataset.done==="1") return;
+
+      card.textContent = symbol;
+
+      if(!first){
+
+        first = {
+          card:card,
+          symbol:symbol
+        };
+
+      }else{
+
+        if(first.symbol===symbol){
+
+          first.card.dataset.done="1";
+          card.dataset.done="1";
+
+          matched += 2;
+          first=null;
+
+          if(matched===symbols.length){
+
+            const reward = 2500;
+
+            balance += reward;
+
+            addScore(500);
+            updateBalance();
+
+            setTimeout(()=>{
+              alert("You matched everything! +₹2,500 demo balance");
+            },200);
+
+          }
+
+        }else{
+
+          lock=true;
+
+          setTimeout(()=>{
+
+            first.card.textContent="?";
+            card.textContent="?";
+
+            first=null;
+            lock=false;
+
+          },700);
+
+        }
+
+      }
+
+    };
+
+    board.appendChild(card);
+
+  });
+
+}
+
+function tttGame(){
+
+  let board = ["","","","","","","","",""];
+  let playerTurn = true;
+  let gameOver = false;
+
+  document.getElementById("gameScreen").innerHTML = `
+
+    <h2>⭕ Tic Tac Toe</h2>
+
+    <p class="message" id="tttMessage">
+      Your turn — you are X
+    </p>
+
+    <div id="tttBoard"
+      style="
+      display:grid;
+      grid-template-columns:repeat(3,80px);
+      gap:8px;
+      justify-content:center;
+      margin:20px;
+      ">
+    </div>
+
+    <button class="action" onclick="tttGame()">
+      NEW GAME
+    </button>
+
+  `;
+
+  const boardEl = document.getElementById("tttBoard");
+  const msg = document.getElementById("tttMessage");
+
+  function render(){
+
+    boardEl.innerHTML="";
+
+    board.forEach((value,i)=>{
+
+      const cell=document.createElement("button");
+
+      cell.textContent=value;
+
+      cell.style.cssText=`
+        width:80px;
+        height:80px;
+        font-size:32px;
+        background:#1a2035;
+        color:white;
+        border:1px solid #3b4361;
+        border-radius:10px;
+      `;
+
+      cell.onclick=()=>playerMove(i);
+
+      boardEl.appendChild(cell);
+
+    });
+
+  }
+
+  function checkWinner(){
+
+    const wins=[
+      [0,1,2],
+      [3,4,5],
+      [6,7,8],
+      [0,3,6],
+      [1,4,7],
+      [2,5,8],
+      [0,4,8],
+      [2,4,6]
+    ];
+
+    for(const w of wins){
+
+      if(
+        board[w[0]] &&
+        board[w[0]]===board[w[1]] &&
+        board[w[1]]===board[w[2]]
+      ){
+        return board[w[0]];
+      }
+
+    }
+
+    if(board.every(x=>x)) return "draw";
+
+    return null;
+  }
+
+  function finish(result){
+
+    gameOver=true;
+
+    if(result==="X"){
+
+      const reward=5000;
+
+      balance+=reward;
+
+      addScore(1000);
+      updateBalance();
+
+      msg.textContent=
+        "🎉 You won! +₹5,000 demo balance";
+
+    }else if(result==="O"){
+
+      const loss=2000;
+
+      balance=Math.max(0,balance-loss);
+
+      updateBalance();
+
+      msg.textContent=
+        "Computer won. -₹2,000 demo balance";
+
+    }else{
+
+      msg.textContent="Draw!";
+
+    }
+
+  }
+
+  function playerMove(i){
+
+    if(gameOver || board[i]) return;
+
+    board[i]="X";
+
+    render();
+
+    let result=checkWinner();
+
+    if(result){
+
+      finish(result);
+      return;
+    }
+
+    msg.textContent="Computer thinking...";
+
+    setTimeout(()=>{
+
+      if(gameOver) return;
+
+      let empty=[];
+
+      board.forEach((v,i)=>{
+        if(!v) empty.push(i);
+      });
+
+      if(empty.length){
+
+        const move=empty[Math.floor(Math.random()*empty.length)];
+
+        board[move]="O";
+
+      }
+
+      render();
+
+      result=checkWinner();
+
+      if(result){
+
+        finish(result);
+
+      }else{
+
+        msg.textContent="Your turn — you are X";
+
+      }
+
+    },400);
+
+  }
+
+  render();
+
+}
+
+function searchGames(){
+
+  const value=
+    document.getElementById("search")
+    .value
+    .toLowerCase();
+
+  document.querySelectorAll(".game").forEach(game=>{
+
+    const name=game.dataset.name;
+
+    game.style.display=
+      name.includes(value) ? "" : "none";
+
+  });
+
+}
+
+function filterGames(category,button){
+
+  document.querySelectorAll(".cat")
+    .forEach(x=>x.classList.remove("active"));
+
+  button.classList.add("active");
+
+  document.querySelectorAll(".game").forEach(game=>{
+
+    game.style.display=
+      category==="all" ||
+      game.dataset.category===category
+      ? ""
+      : "none";
+
+  });
+
+}
+
+function showLeaderboard(){
+
+  document.getElementById("leaderboard")
+    .classList.add("active");
+
+  document.getElementById("leaderboard")
+    .scrollIntoView({behavior:"smooth"});
+
+  document.getElementById("yourScore")
+    .textContent=score;
+
+}
+
+function closeLeaderboard(){
+
+  document.getElementById("leaderboard")
+    .classList.remove("active");
+
+}
+
+function resetDemo(){
+
+  const ok=confirm(
+    "Reset demo balance back to ₹5,00,000?"
+  );
+
+  if(ok){
+
+    balance=500000;
+    score=0;
+
+    localStorage.setItem("flexBalance",balance);
+    localStorage.setItem("flexScore",score);
+
+    updateBalance();
+
+    alert("Demo account reset!");
+
+  }
+
+}
+
+updateBalance();
+
+</script>
+
+</body>
+</html>
